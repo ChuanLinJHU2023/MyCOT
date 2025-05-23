@@ -1,0 +1,148 @@
+import matplotlib.pyplot as plt
+from distance_causal_pulp import *
+from utils import *
+
+down_factor = 2
+scaling_parameter_c = 4
+
+img = plt.imread('CMNIST/train/0/1-4.png')
+img_A = np.array(img)
+img_A = downsample_image(img_A, down_factor)
+
+img = plt.imread('CMNIST/train/0/1-5.png')
+img_B = np.array(img)
+img_B = downsample_image(img_B, down_factor)
+
+img = plt.imread('CMNIST/train/1/8-4.png')
+img_D = np.array(img)
+img_D = downsample_image(img_D, down_factor)
+
+print("SHAPE")
+print(img_A.shape)
+
+print("################### Causal Distance Between AB #########################")
+dist_AB, _ = calculate_causal_distance_between_images(img_A, img_B, scaling_parameter_c)
+print(dist_AB)
+print("########################################################################")
+
+
+print("################### Causal Distance Between AD #########################")
+dist_AD, _ = calculate_causal_distance_between_images(img_A, img_D, scaling_parameter_c)
+print(dist_AD)
+print("#########################################################################")
+
+
+
+/opt/anaconda3/envs/MyProject1/bin/python /Users/chuanlin/JHU-LAB/MyCOT/digit_causal_pulp.py
+SHAPE
+(14, 14, 3)
+################### Causal Distance Between AB #########################
+Welcome to the CBC MILP Solver
+Version: 2.10.3
+Build Date: Dec 15 2019
+
+command line - /opt/anaconda3/envs/MyProject1/lib/python3.11/site-packages/pulp/apis/../solverdir/cbc/osx/i64/cbc /var/folders/my/4hyht8y12x7ft09pkpvnkdsh0000gn/T/9d47f3965ac14ab8b2e06ccd3f2a9f57-pulp.mps -timeMode elapsed -branch -printingOptions all -solution /var/folders/my/4hyht8y12x7ft09pkpvnkdsh0000gn/T/9d47f3965ac14ab8b2e06ccd3f2a9f57-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 116429 COLUMNS
+At line 2157378 RHS
+At line 2273803 BOUNDS
+At line 2273804 ENDATA
+Problem MODEL has 116424 rows, 345744 columns and 1687560 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Presolve 100492 (-15932) rows, 305956 (-39788) columns and 1506260 (-181300) elements
+Perturbing problem by 0.001% of 30 - largest nonzero change 0.00041773117 ( 0.0139951%) - largest zero change 0.00012966165
+0  Obj 0 Primal inf 1.9988801 (1120)
+726  Obj 0.27201853 Primal inf 0.98918123 (907)
+1318  Obj 0.45099025 Primal inf 1.742394 (1193)
+1833  Obj 0.48530932 Primal inf 1.3495926 (952)
+2362  Obj 0.50716972 Primal inf 1.1616622 (997)
+2888  Obj 0.52068589 Primal inf 0.91730206 (976)
+3494  Obj 0.53555209 Primal inf 4.3587036 (833)
+4110  Obj 0.54654577 Primal inf 0.23206706 (487)
+4581  Obj 0.55173368
+4581  Obj 0.55163745 Dual inf 5.0338497e-07 (2)
+Optimal - objective value 0.55163745
+After Postsolve, objective 0.55163745, infeasibilities - dual 4.951258e-05 (179), primal 0 (0)
+Presolved model was optimal, full model needs cleaning up
+0  Obj 0.55163745 Dual inf 4.9512575e-05 (179)
+200  Obj 0.55163745 Dual inf 0.0032948244 (3857)
+242  Obj 0.55163745
+Optimal - objective value 0.55163745
+Optimal objective 0.5516374479 - 4823 iterations time 6.472, Presolve 0.27
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       7.14   (Wallclock seconds):       7.28
+
+0.551637450183827
+########################################################################
+################### Causal Distance Between AD #########################
+Welcome to the CBC MILP Solver
+Version: 2.10.3
+Build Date: Dec 15 2019
+
+command line - /opt/anaconda3/envs/MyProject1/lib/python3.11/site-packages/pulp/apis/../solverdir/cbc/osx/i64/cbc /var/folders/my/4hyht8y12x7ft09pkpvnkdsh0000gn/T/14fc89d719ff48bcb04b015b2f737def-pulp.mps -timeMode elapsed -branch -printingOptions all -solution /var/folders/my/4hyht8y12x7ft09pkpvnkdsh0000gn/T/14fc89d719ff48bcb04b015b2f737def-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 116429 COLUMNS
+At line 2157378 RHS
+At line 2273803 BOUNDS
+At line 2273804 ENDATA
+Problem MODEL has 116424 rows, 345744 columns and 1687560 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Presolve 104876 (-11548) rows, 319284 (-26460) columns and 1572228 (-115332) elements
+Perturbing problem by 0.001% of 30 - largest nonzero change 0.00042708516 ( 0.013997203%) - largest zero change 0.00012998824
+0  Obj 0 Primal inf 1.9988641 (1136)
+737  Obj 0.24770664 Primal inf 1.4789492 (1173)
+1474  Obj 0.41972154 Primal inf 1.9884461 (1070)
+2073  Obj 0.45685323 Primal inf 0.64260293 (1016)
+2591  Obj 0.47219456 Primal inf 1.0832228 (1149)
+3072  Obj 0.48192001 Primal inf 0.27188144 (1054)
+3565  Obj 0.48747487 Primal inf 0.69284786 (990)
+4087  Obj 0.49038447 Primal inf 0.11303454 (786)
+4585  Obj 0.49333655 Primal inf 0.1242353 (749)
+5071  Obj 0.49543552 Primal inf 3.1645889 (953)
+5578  Obj 0.49654969 Primal inf 0.51935093 (1083)
+6049  Obj 0.49742882 Primal inf 0.40938598 (737)
+6554  Obj 0.49817799 Primal inf 0.20866731 (794)
+7028  Obj 0.49869425
+7028  Obj 0.49859762 Dual inf 3.1878683e-06 (12)
+Optimal - objective value 0.49859762
+After Postsolve, objective 0.49859762, infeasibilities - dual 0.0005231844 (1687), primal 0 (0)
+Presolved model was optimal, full model needs cleaning up
+0  Obj 0.49859762 Dual inf 0.00052318438 (1687)
+18  Obj 0.49859761 Dual inf 0.00014991192 (852)
+19  Obj 0.49859762 Dual inf 55.705695 (894)
+20  Obj 0.49859762 Dual inf 0.00014361472 (854)
+94  Obj 0.50042786 Dual inf 402612.47 (39637)
+294  Obj 0.50041414 Primal inf 6.294095e-08 (3) Dual inf 7.863186e+12 (131754)
+494  Obj 0.49858343 Dual inf 27509.943 (13388)
+694  Obj 0.49858128 Dual inf 4765.219 (5311)
+894  Obj 0.49857935 Dual inf 2652.3514 (4061)
+1094  Obj 0.4985772 Dual inf 1377.0568 (3103)
+1294  Obj 0.49857695 Dual inf 440.62963 (2094)
+1494  Obj 0.4985765 Dual inf 56.292063 (1675)
+1668  Obj 0.49857638 Dual inf 0.00022099349 (830)
+1719  Obj 0.49857638 Dual inf 0.00022099349 (830)
+1722  Obj 0.49857637 Dual inf 0.00043522561 (1023)
+1730  Obj 0.49857638 Dual inf 0.00010477049 (544)
+1742  Obj 0.49857637 Dual inf 5.1962824e-05 (420)
+1746  Obj 0.49857637 Dual inf 5.1130309e-05 (418)
+1748  Obj 0.49857637 Dual inf 4.9313359e-05 (410)
+1760  Obj 0.49857637 Dual inf 0.00010211068 (564)
+1771  Obj 0.49857637 Dual inf 5.7873161e-05 (443)
+1777  Obj 0.49857637 Dual inf 5.5416983e-05 (439)
+1783  Obj 0.49857638 Dual inf 5.7423894e-05 (433)
+1791  Obj 0.49857637 Dual inf 5.9312711e-05 (402)
+1801  Obj 0.49857637 Dual inf 9.1074909e-05 (437)
+1812  Obj 0.49857637 Dual inf 3.832066e-05 (310)
+Optimal - objective value 0.49857637
+Optimal objective 0.4985763719 - 8840 iterations time 13.712, Presolve 0.27
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       14.39   (Wallclock seconds):       14.59
+
+0.4985763707586187
+#########################################################################
+
+Process finished with exit code 0
