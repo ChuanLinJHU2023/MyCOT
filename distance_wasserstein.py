@@ -50,18 +50,10 @@ def calculate_wasserstein_distance(vector1, vector2, costs):
     wasserstein_distance = pulp.value(prob.objective)
     return wasserstein_distance, transport_plan
 
-# Example usage:
-# a = [0.2, 0.5, 0.3]
-# b = [0.3, 0.4, 0.3]
-# costs = [[0,1,2], [1,0,1], [2,1,0]]
-# dist, plan = calculate_wasserstein_distance(a, b, costs)
-# print("Distance:", dist)
-# print("Plan:\n", plan)
-
 def calculate_wasserstein_distance_between_images(image1, image2, scaling_parameter_c = 4):
     assert image1.shape == image2.shape
     H, W, C = image1.shape
     vector1 = image1.flatten()
     vector2 = image2.flatten()
-    costs = [[get_cost(i, j, H, W, C, scaling_parameter_c) for j in range(len(vector2))] for i in range(len(vector1))]
+    costs = [[get_cost_from_ij(i, j, H, W, C, scaling_parameter_c) for j in range(len(vector2))] for i in range(len(vector1))]
     return calculate_wasserstein_distance(vector1, vector2, costs)
