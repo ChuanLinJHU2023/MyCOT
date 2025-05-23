@@ -1,6 +1,7 @@
 import pulp
 from utils import *
 
+
 def calculate_causal_distance(Matrix1, Matrix2, costs):
     """
     Calculate Wasserstein distance between two discrete distributions using linear programming.
@@ -71,6 +72,21 @@ def calculate_causal_distance(Matrix1, Matrix2, costs):
     # Get the optimal value of the problem
     causal_distance = pulp.value(prob.objective)
     return causal_distance, transport_plan
+
+
+def get_cost_from_minj(m, i, n, j, H, W, C, scaling_parameter_c=4):
+    assert m<H*W
+    assert n<H*W
+    assert i<C
+    assert j<C
+    h1 = m // W
+    w1 = m % W
+    h2 = n // W
+    w2 = n % W
+    c1 = i
+    c2 = j
+    res = np.abs(h1 - h2) + np.abs(w1 - w2) + (c1 != c2) * scaling_parameter_c
+    return res
 
 
 def calculate_causal_distance_between_images(image1, image2, scaling_parameter_c = 4):

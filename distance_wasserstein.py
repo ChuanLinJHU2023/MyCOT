@@ -50,6 +50,38 @@ def calculate_wasserstein_distance(vector1, vector2, costs):
     wasserstein_distance = pulp.value(prob.objective)
     return wasserstein_distance, transport_plan
 
+
+def get_hwc_from_i(i, H, W, C):
+    """
+    Given the index i in a flattened image vector, return the (h, w, c) position.
+
+    Parameters:
+    - i: int, index in the flattened vector
+    - H: int, height of the image
+    - W: int, width of the image
+    - C: int, number of channels
+
+    Returns:
+    - (h, w, c): tuple of the pixel's position
+    """
+    total = H * W * C
+    if i < 0 or i >= total:
+        raise ValueError("Index i out of bounds for given image dimensions.")
+
+    c = i % C
+    i //= C
+    w = i % W
+    h = i // W
+    return h, w, c
+
+
+def get_cost_from_ij(i, j, H, W, C, scaling_parameter_c=4):
+    h1, w1, c1 = get_hwc_from_i(i, H, W, C)
+    h2, w2, c2 = get_hwc_from_i(j, H, W, C)
+    res = np.abs(h1 - h2) + np.abs(w1 - w2) + (c1 != c2) * scaling_parameter_c
+    return res
+
+
 def calculate_wasserstein_distance_between_images(image1, image2, scaling_parameter_c = 4):
     assert image1.shape == image2.shape
     H, W, C = image1.shape
