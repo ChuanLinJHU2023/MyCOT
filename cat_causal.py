@@ -1,0 +1,36 @@
+import matplotlib.pyplot as plt
+from distance_causal_transport import *
+from distance_causal_transport import calculate_causal_distance
+from utils import *
+
+down_factor = 32
+img = plt.imread('cat_images/A.jpg')
+img_A = np.array(img)
+img_A = downsample_image(img_A, down_factor)
+
+img = plt.imread('cat_images/B.jpg')
+img_B = np.array(img)
+img_B = downsample_image(img_B, down_factor)
+
+img = plt.imread('cat_images/D.jpg')
+img_D = np.array(img)
+img_D = downsample_image(img_D, down_factor)
+
+
+
+print("################### Causal Distance Between AA #########################")
+dist_AA, _ = calculate_causal_distance_between_images(img_A, img_A)
+print(dist_AA)
+print("#################################################################")
+
+
+print("################### Causal Distance Between AB #########################")
+dist_AB, _ = calculate_causal_distance_between_images(img_A, img_B)
+print(dist_AB)
+print("#################################################################")
+
+
+print("################### Causal Distance Between AA #########################")
+dist_AD, _ = calculate_causal_distance_between_images(img_A, img_D)
+print(dist_AD)
+print("#################################################################")
