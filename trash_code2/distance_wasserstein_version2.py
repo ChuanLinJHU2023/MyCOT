@@ -38,4 +38,4 @@ def calculate_wasser_distance_between_images_version2(image1, image2, reg=None, 
     vector2 = image2.flatten()
     calculate_cost = lambda i, j: get_cost_from_ij_version2(i, j, image1, distance_between_channel)
     res = calculate_wasser_distance_version2(vector1, vector2, calculate_cost, reg)
-    return res
+    return res, None

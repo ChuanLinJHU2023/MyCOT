@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
-from distance_wasserstein import *
+from distance_wasserstein_pot import *
 from utils import *
 
-down_factor = 32
+down_factor = 64
 scaling_parameter_c = 4
 
 img = plt.imread('cat_images/A.jpg')
@@ -21,19 +21,14 @@ img_D = downsample_image(img_D, down_factor)
 print("SHAPE")
 print(img_A.shape)
 
-# print("################### Wasser Distance Between AA #########################")
-# dist_AA, _ = calculate_wasserstein_distance_between_images(img_A, img_A, scaling_parameter_c)
-# print(dist_AA)
-# print("#################################################################")
-
 
 print("################### Wasser Distance Between AB #########################")
 dist_AB, _ = calculate_wasserstein_distance_between_images(img_A, img_B, scaling_parameter_c)
 print(dist_AB)
-print("#################################################################")
+print("########################################################################")
 
 
 print("################### Wasser Distance Between AD #########################")
 dist_AD, _ = calculate_wasserstein_distance_between_images(img_A, img_D, scaling_parameter_c)
 print(dist_AD)
-print("#################################################################")
+print("########################################################################")

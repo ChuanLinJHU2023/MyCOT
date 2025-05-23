@@ -1,0 +1,167 @@
+import matplotlib.pyplot as plt
+from distance_wasserstein import *
+from utils import *
+
+down_factor = 64
+scaling_parameter_c = 4
+
+img = plt.imread('cat_images/A.jpg')
+img_A = np.array(img)
+img_A = downsample_image(img_A, down_factor)
+
+img = plt.imread('cat_images/B.jpg')
+img_B = np.array(img)
+img_B = downsample_image(img_B, down_factor)
+
+img = plt.imread('cat_images/D.jpg')
+img_D = np.array(img)
+img_D = downsample_image(img_D, down_factor)
+
+
+print("SHAPE")
+print(img_A.shape)
+
+
+print("################### Wasser Distance Between AB #########################")
+dist_AB, _ = calculate_wasserstein_distance_between_images(img_A, img_B, scaling_parameter_c)
+print(dist_AB)
+print("#################################################################")
+
+
+print("################### Wasser Distance Between AD #########################")
+dist_AD, _ = calculate_wasserstein_distance_between_images(img_A, img_D, scaling_parameter_c)
+print(dist_AD)
+print("#################################################################")
+
+
+/opt/anaconda3/envs/MyProject1/bin/python /Users/chuanlin/JHU-LAB/MyCOT/cat_causal.py
+SHAPE
+(16, 16, 3)
+################### Causal Distance Between AB #########################
+Welcome to the CBC MILP Solver
+Version: 2.10.3
+Build Date: Dec 15 2019
+
+command line - /opt/anaconda3/envs/MyProject1/lib/python3.11/site-packages/pulp/apis/../solverdir/cbc/osx/i64/cbc /var/folders/my/4hyht8y12x7ft09pkpvnkdsh0000gn/T/512c8793ad3a490ea4e6b8baa5fec210-pulp.mps -timeMode elapsed -branch -printingOptions all -solution /var/folders/my/4hyht8y12x7ft09pkpvnkdsh0000gn/T/512c8793ad3a490ea4e6b8baa5fec210-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 198149 COLUMNS
+At line 3736326 RHS
+At line 3934471 BOUNDS
+At line 3934472 ENDATA
+Problem MODEL has 198144 rows, 589824 columns and 2949120 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Presolve 174242 (-23902) rows, 517632 (-72192) columns and 2588160 (-360960) elements
+Perturbing problem by 0.001% of 34 - largest nonzero change 0.00046390036 ( 0.014398719%) - largest zero change 0.00013397559
+0  Obj 0 Primal inf 1.998558 (1442)
+910  Obj 0.21886218 Primal inf 1.5881482 (1655)
+1690  Obj 0.34004567 Primal inf 13.810343 (1717)
+2426  Obj 0.40010313 Primal inf 4.269716 (1829)
+3013  Obj 0.44218417 Primal inf 18.518876 (1977)
+3590  Obj 0.47450577 Primal inf 45.695442 (2109)
+4171  Obj 0.50117667 Primal inf 163.86991 (2156)
+4751  Obj 0.51978655 Primal inf 86.827036 (2177)
+5233  Obj 0.5322315 Primal inf 26.865893 (2252)
+5661  Obj 0.54667815 Primal inf 364.0914 (2422)
+6091  Obj 0.55640861 Primal inf 121.83649 (2235)
+6397  Obj 0.56225502 Primal inf 3435.2665 (2323)
+7005  Obj 0.58060431 Primal inf 385.24336 (2234)
+7375  Obj 0.58430708 Primal inf 266.65962 (2074)
+7875  Obj 0.58771677 Primal inf 363.51821 (2120)
+8116  Obj 0.58972091 Primal inf 1250.5344 (2148)
+8348  Obj 0.59359871 Primal inf 1988.5226 (2124)
+8864  Obj 0.59564271 Primal inf 978.65236 (2030)
+9430  Obj 0.59962445 Primal inf 934.65629 (1909)
+10052  Obj 0.6079275 Primal inf 198.78338 (1780)
+10495  Obj 0.61042781 Primal inf 650.53169 (1838)
+11210  Obj 0.61203573 Primal inf 2212.889 (1869)
+11904  Obj 0.61315706 Primal inf 1932.5777 (1807)
+12539  Obj 0.61339016 Primal inf 330.1057 (1676)
+13186  Obj 0.61366364 Primal inf 457.09149 (1730)
+13785  Obj 0.61494257 Primal inf 748.56992 (1699)
+14546  Obj 0.61849421 Primal inf 434.77712 (1794)
+15187  Obj 0.61864875 Primal inf 347.27872 (1580)
+15418  Obj 0.61884417 Primal inf 15.548673 (1396)
+16166  Obj 0.62627756 Primal inf 1327.049 (1637)
+17003  Obj 0.62865849 Primal inf 11.426827 (1227)
+17649  Obj 0.62867196 Primal inf 21.901586 (1325)
+18221  Obj 0.6286993 Primal inf 27.75848 (1148)
+18500  Obj 0.62871268 Primal inf 20.639782 (1172)
+18851  Obj 0.62873418 Primal inf 39.91459 (1157)
+19313  Obj 0.62883404 Primal inf 1043.4452 (1257)
+19801  Obj 0.62960859 Primal inf 2045.072 (910)
+20654  Obj 0.63105971 Primal inf 0.61045407 (783)
+21470  Obj 0.6320801 Primal inf 0.39900865 (668)
+22380  Obj 0.63240178 Primal inf 0.4914546 (467)
+23290  Obj 0.63265486 Primal inf 0.00029562081 (42)
+23425  Obj 0.63266514
+Optimal - objective value 0.63256201
+After Postsolve, objective 0.63256201, infeasibilities - dual 0 (0), primal 1.2323377e-05 (34)
+Presolved model was optimal, full model needs cleaning up
+0  Obj 0.63256201 Primal inf 1.5158958e-05 (40)
+70  Obj 0.63256711
+Optimal - objective value 0.63256711
+Optimal objective 0.6325671131 - 23495 iterations time 68.102, Presolve 0.49
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       69.34   (Wallclock seconds):       70.08
+
+0.6325671132366696
+#################################################################
+################### Causal Distance Between AD #########################
+Welcome to the CBC MILP Solver
+Version: 2.10.3
+Build Date: Dec 15 2019
+
+command line - /opt/anaconda3/envs/MyProject1/lib/python3.11/site-packages/pulp/apis/../solverdir/cbc/osx/i64/cbc /var/folders/my/4hyht8y12x7ft09pkpvnkdsh0000gn/T/c89267760e65466f944f7055dba1f676-pulp.mps -timeMode elapsed -branch -printingOptions all -solution /var/folders/my/4hyht8y12x7ft09pkpvnkdsh0000gn/T/c89267760e65466f944f7055dba1f676-pulp.sol (default strategy 1)
+At line 2 NAME          MODEL
+At line 3 ROWS
+At line 198149 COLUMNS
+At line 3736326 RHS
+At line 3934471 BOUNDS
+At line 3934472 ENDATA
+Problem MODEL has 198144 rows, 589824 columns and 2949120 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Presolve 198127 (-17) rows, 576768 (-13056) columns and 2883840 (-65280) elements
+Perturbing problem by 0.001% of 34 - largest nonzero change 0.00046959827 ( 0.014397831%) - largest zero change 0.00013393075
+0  Obj 0 Primal inf 1.998481 (1519)
+970  Obj 0.15554091 Primal inf 1.2456989 (1769)
+1940  Obj 0.24859407 Primal inf 1.2010061 (1773)
+2614  Obj 0.27847405 Primal inf 4.4473802 (1930)
+3266  Obj 0.30031161 Primal inf 183.29723 (2155)
+3967  Obj 0.31982889 Primal inf 2.9056238 (2015)
+4703  Obj 0.33854916 Primal inf 4.7867716 (1918)
+5443  Obj 0.35023958 Primal inf 9.2052835 (1850)
+6142  Obj 0.36067483 Primal inf 3.672364 (1788)
+6853  Obj 0.36991182 Primal inf 2.2811866 (1732)
+7579  Obj 0.37856738 Primal inf 7.0677287 (1610)
+8319  Obj 0.38600465 Primal inf 7.1288414 (1542)
+9021  Obj 0.39055443 Primal inf 59.333569 (1546)
+9745  Obj 0.39515168 Primal inf 9.4212755 (1434)
+10549  Obj 0.39848199 Primal inf 70.710461 (1502)
+11241  Obj 0.40075218 Primal inf 17.702383 (1399)
+11978  Obj 0.40378978 Primal inf 2.0755174 (1243)
+12718  Obj 0.40522648 Primal inf 2.7108522 (1164)
+13573  Obj 0.40688599 Primal inf 1.5031369 (1065)
+14336  Obj 0.40864649 Primal inf 0.37161485 (881)
+15097  Obj 0.41002855 Primal inf 1.5263525 (827)
+15931  Obj 0.41154307 Primal inf 3.0052575 (866)
+16901  Obj 0.41267773 Primal inf 0.11658106 (539)
+17695  Obj 0.41342443 Primal inf 0.53016185 (382)
+18665  Obj 0.41368583 Primal inf 0.0017577402 (54)
+18776  Obj 0.41370156
+Optimal - objective value 0.41359978
+After Postsolve, objective 0.41359978, infeasibilities - dual 0 (0), primal 4.1678674e-06 (13)
+Presolved model was optimal, full model needs cleaning up
+0  Obj 0.41359978 Primal inf 4.1678674e-06 (13)
+45  Obj 0.41360004
+Optimal - objective value 0.41360004
+Optimal objective 0.4136000433 - 18821 iterations time 60.842, Presolve 0.46
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       62.04   (Wallclock seconds):       62.79
+
+0.4136000433683228
+#################################################################
+
+Process finished with exit code 0
