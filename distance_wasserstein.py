@@ -58,7 +58,7 @@ def calculate_wasserstein_distance(vector1, vector2, costs):
 # print("Distance:", dist)
 # print("Plan:\n", plan)
 
-def calculate_wasserstein_distance_between_images(image1, image2, scaling_parameter_c = 1):
+def calculate_wasserstein_distance_between_images(image1, image2, scaling_parameter_c = 4):
     assert image1.shape == image2.shape
     H, W, C = image1.shape
     vector1 = image1.flatten()

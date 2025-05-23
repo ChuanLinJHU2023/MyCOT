@@ -30,7 +30,7 @@ def get_image_coords_from_vector_index(i, H, W, C):
 # h, w, c = get_image_coords(1234, 64, 64, 3)
 # print(h, w, c)
 
-def get_cost(i, j, H, W, C, scaling_parameter_c=1):
+def get_cost(i, j, H, W, C, scaling_parameter_c=4):
     h1, w1, c1 = get_image_coords_from_vector_index(i, H, W, C)
     h2, w2, c2 = get_image_coords_from_vector_index(j, H, W, C)
     res = np.abs(h1 - h2) + np.abs(w1 - w2) + (c1 != c2) * scaling_parameter_c
@@ -48,7 +48,7 @@ def get_cost(i, j, H, W, C, scaling_parameter_c=1):
 #         print(h2, w2, c2)
 #         print(cost)
 
-def get_cost2(m, i, n, j, H, W, C, scaling_parameter_c=1):
+def get_cost2(m, i, n, j, H, W, C, scaling_parameter_c=4):
     assert m<H*W
     assert n<H*W
     assert i<C

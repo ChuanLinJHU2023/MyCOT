@@ -19,10 +19,10 @@ img_D = downsample_image(img_D, down_factor)
 
 
 
-print("################### Causal Distance Between AA #########################")
-dist_AA, _ = calculate_causal_distance_between_images(img_A, img_A, scaling_parameter_c=C)
-print(dist_AA)
-print("#################################################################")
+# print("################### Causal Distance Between AA #########################")
+# dist_AA, _ = calculate_causal_distance_between_images(img_A, img_A, scaling_parameter_c=C)
+# print(dist_AA)
+# print("#################################################################")
 
 
 print("################### Causal Distance Between AB #########################")
