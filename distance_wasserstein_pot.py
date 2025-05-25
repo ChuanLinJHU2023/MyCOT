@@ -34,3 +34,4 @@ def calculate_wasserstein_distance_between_images(image1, image2, scaling_parame
     costs = costs.reshape((len(vector1), len(vector2)))
     res = calculate_wasserstein_distance(vector1, vector2, costs)
     return res, None
+
