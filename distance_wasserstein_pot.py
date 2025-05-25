@@ -29,6 +29,8 @@ def calculate_wasserstein_distance_between_images(image1, image2, scaling_parame
     (H, W, C) = image1.shape
     vector1 = image1.flatten()
     vector2 = image2.flatten()
-    costs = [[get_cost_from_ij(i, j, H, W, C, scaling_parameter_c) for j in range(len(vector2))] for i in range(len(vector1))]
+    # costs = [[get_cost_from_ij(i, j, H, W, C, scaling_parameter_c) for j in range(len(vector2))] for i in range(len(vector1))]
+    costs = np.array([get_cost_from_ij(i, j, H, W, C, scaling_parameter_c) for i in range(len(vector1)) for j in range(len(vector2))])
+    costs = costs.reshape((len(vector1), len(vector2)))
     res = calculate_wasserstein_distance(vector1, vector2, costs)
     return res, None
