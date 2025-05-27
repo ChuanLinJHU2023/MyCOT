@@ -76,10 +76,6 @@ print("########################################################################"
 
 print("################### Fourth Downsample Method #########################")
 def downsample_image(image, factor):
-    # Check if the image is a NumPy array
-    if not isinstance(image, np.ndarray):
-        raise ValueError("Input image must be a NumPy array.")
-
     # Downsample by slicing
     downsampled_image = image[::factor, ::factor]
     return downsampled_image

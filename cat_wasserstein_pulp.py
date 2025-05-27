@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from distance_wasserstein_pulp import *
 from utils import *
 
-down_factor = 64
+down_factor = 16
 scaling_parameter_c = 4
 
 img = plt.imread('cat_images/A.jpg')

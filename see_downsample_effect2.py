@@ -92,10 +92,3 @@ dist_AB, _ = calculate_bicausal_distance_between_images(img_A, img_B, scaling_pa
 print(dist_AB)
 print("########################################################################")
 
-
-
-# /opt/anaconda3/envs/MyProject1/bin/python /Users/chuanlin/JHU-LAB/MyCOT/see_downsample_effect2.py
-# ################### First Downsample Method #########################
-# 2.4293854000643367
-# ########################################################################
-# ################### Second Downsample Method #########################
