@@ -97,3 +97,4 @@ def calculate_causal_distance_between_images(image1, image2, scaling_parameter_c
     costs = np.array([ get_cost_from_minj(m, i, n, j, H, W, C, scaling_parameter_c) for m in range(len(Matrix1)) for i in range(len(Matrix1[0])) for n in range(len(Matrix2)) for j in range(len(Matrix2[0]))])
     costs = costs.reshape((len(Matrix1), len(Matrix1[0]), len(Matrix2), len(Matrix2[0])))
     return calculate_causal_distance(Matrix1, Matrix2, costs)
+

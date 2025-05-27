@@ -13,11 +13,11 @@ def downsample_image(image, factor):
     downsampled_image = cv2.resize(image, new_size, interpolation=cv2.INTER_AREA)
     return np.array(downsampled_image)
 
-img = plt.imread('cat_images/A.jpg')
+img = plt.imread('../image_cats/A.jpg')
 img_A = np.array(img)
 img_A = downsample_image(img_A, down_factor)
 
-img = plt.imread('cat_images/B.jpg')
+img = plt.imread('../image_cats/B.jpg')
 img_B = np.array(img)
 img_B = downsample_image(img_B, down_factor)
 
@@ -36,11 +36,11 @@ def downsample_image(image, factor):
     downsampled_image = cv2.resize(image, new_size, interpolation=cv2.INTER_LINEAR)
     return np.array(downsampled_image)
 
-img = plt.imread('cat_images/A.jpg')
+img = plt.imread('../image_cats/A.jpg')
 img_A = np.array(img)
 img_A = downsample_image(img_A, down_factor)
 
-img = plt.imread('cat_images/B.jpg')
+img = plt.imread('../image_cats/B.jpg')
 img_B = np.array(img)
 img_B = downsample_image(img_B, down_factor)
 
@@ -60,11 +60,11 @@ def downsample_image(image, factor):
     downsampled_image = cv2.resize(image, new_size, interpolation=cv2.INTER_CUBIC)
     return np.array(downsampled_image)
 
-img = plt.imread('cat_images/A.jpg')
+img = plt.imread('../image_cats/A.jpg')
 img_A = np.array(img)
 img_A = downsample_image(img_A, down_factor)
 
-img = plt.imread('cat_images/B.jpg')
+img = plt.imread('../image_cats/B.jpg')
 img_B = np.array(img)
 img_B = downsample_image(img_B, down_factor)
 
@@ -80,11 +80,11 @@ def downsample_image(image, factor):
     downsampled_image = image[::factor, ::factor]
     return downsampled_image
 
-img = plt.imread('cat_images/A.jpg')
+img = plt.imread('../image_cats/A.jpg')
 img_A = np.array(img)
 img_A = downsample_image(img_A, down_factor)
 
-img = plt.imread('cat_images/B.jpg')
+img = plt.imread('../image_cats/B.jpg')
 img_B = np.array(img)
 img_B = downsample_image(img_B, down_factor)
 

@@ -13,15 +13,15 @@ def downsample_image(image, factor):
 
 down_factor = 32
 distance_between_channel = 5
-img = plt.imread('../cat_images/A.jpg')
+img = plt.imread('../image_cats/A.jpg')
 img_A = np.array(img)
 img_A_down = downsample_image(img_A, down_factor)
 
-img = plt.imread('../cat_images/B.jpg')
+img = plt.imread('../image_cats/B.jpg')
 img_B = np.array(img)
 img_B_down = downsample_image(img_B, down_factor)
 
-img = plt.imread('../cat_images/D.jpg')
+img = plt.imread('../image_cats/D.jpg')
 img_D = np.array(img)
 img_D_down = downsample_image(img_D, down_factor)
 

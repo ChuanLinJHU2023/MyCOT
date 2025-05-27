@@ -5,15 +5,15 @@ from utils import *
 down_factor = 2
 scaling_parameter_c = 4
 
-img = plt.imread('CMNIST/train/0/1-4.png')
+img = plt.imread('../image_digits/train/0/1-4.png')
 img_A = np.array(img)
 img_A = downsample_image(img_A, down_factor)
 
-img = plt.imread('CMNIST/train/0/1-5.png')
+img = plt.imread('../image_digits/train/0/1-5.png')
 img_B = np.array(img)
 img_B = downsample_image(img_B, down_factor)
 
-img = plt.imread('CMNIST/train/1/8-4.png')
+img = plt.imread('../image_digits/train/1/8-4.png')
 img_D = np.array(img)
 img_D = downsample_image(img_D, down_factor)
 

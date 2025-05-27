@@ -5,8 +5,8 @@ from PIL import Image, ImageOps
 # Paths
 original_train_dir = 'MNIST/train'
 original_test_dir = 'MNIST/test'
-new_train_dir = 'CMNIST/train'
-new_test_dir = 'CMNIST/test'
+new_train_dir = 'image_digits/train'
+new_test_dir = 'image_digits/test'
 
 # Create new directory structure
 os.makedirs(new_train_dir, exist_ok=True)
@@ -60,4 +60,4 @@ def process_directory(source_dir, target_dir):
 process_directory(original_train_dir, new_train_dir)
 process_directory(original_test_dir, new_test_dir)
 
-print("Diverse color variants created in 'CMNIST/train/' and 'CMNIST/test/'.")
+print("Diverse color variants created in 'image_digits/train/' and 'image_digits/test/'.")
