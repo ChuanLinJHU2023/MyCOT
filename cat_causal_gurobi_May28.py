@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-from distance_causal_pulp import *
+from distance_causal_gurobi import *
+from utils import *
 
 scaling_parameter_c = 128
 

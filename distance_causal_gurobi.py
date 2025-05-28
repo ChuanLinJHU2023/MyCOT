@@ -1,13 +1,13 @@
 from PIL import Image
 import numpy as np
-import tqdm.notebook as tq
 import gurobipy as grb
 import os
 import pandas as pd
 
 
 
-def calculate_causal_distance_between_images(image1, image2, scaling_parameter_c = 4):
+def calculate_causal_distance_between_images(image1, image2, scaling_parameter_c = 128):
+    assert scaling_parameter_c==128
     H, W, C = image1.shape
     assert image1.shape == image2.shape
     assert C == 3
@@ -19,7 +19,7 @@ def calculate_causal_distance_between_images(image1, image2, scaling_parameter_c
     pixel = H
     pp = pixel ** 2
     cost = np.zeros((pp, 3, pp, 3), dtype=int)
-    for i in tq.tqdm(range(pp)):
+    for i in range(pp):
         xi = i % pixel
         yi = i // pixel
         for ci in range(3):
@@ -34,26 +34,26 @@ def calculate_causal_distance_between_images(image1, image2, scaling_parameter_c
         gamma = mod.addMVar((pp, 3, pp, 3))
         ones = np.ones(pp)
         mod.addConstrs(
-            sum(gamma[i, j, :, k] @ ones for k in range(3)) == P_hat[i, j] for i in tq.tqdm(range(pp)) for j in
+            sum(gamma[i, j, :, k] @ ones for k in range(3)) == P_hat[i, j] for i in range(pp) for j in
             range(3))
         mod.addConstrs(
-            sum(gamma[:, k, i, j] @ ones for k in range(3)) == P_new[i, j] for i in tq.tqdm(range(pp)) for j in
+            sum(gamma[:, k, i, j] @ ones for k in range(3)) == P_new[i, j] for i in range(pp) for j in
             range(3))
         if causal:
-            for i in tq.tqdm(range(pp)):
+            for i in range(pp):
                 c0, c1, c2 = P_hat[i, :]
                 mod.addConstr(
                     c1 * sum(gamma[i, 0, :, k] for k in range(3)) == c0 * sum(gamma[i, 1, :, k] for k in range(3)))
                 mod.addConstr(
                     c2 * sum(gamma[i, 0, :, k] for k in range(3)) == c0 * sum(gamma[i, 2, :, k] for k in range(3)))
 
-        loss = sum(cost[i, j, :, k] @ gamma[i, j, :, k] for i in tq.tqdm(range(pp)) for j in range(3) for k in range(3))
+        loss = sum(cost[i, j, :, k] @ gamma[i, j, :, k] for i in range(pp) for j in range(3) for k in range(3))
         mod.setObjective(loss, grb.GRB.MINIMIZE)
         mod.optimize()
         return mod.ObjVal
 
-        P_hat = image1
-        P_new = image2
-        return transport_distance(P_hat, P_new)
+    P_hat = image1
+    P_new = image2
+    return transport_distance(P_hat, P_new), None
 
 

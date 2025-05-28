@@ -71,7 +71,7 @@ def calculate_causal_distance(Matrix1, Matrix2, costs):
     return causal_distance, transport_plan
 
 
-def get_cost_from_minj(m, i, n, j, H, W, C, scaling_parameter_c=4):
+def get_cost_from_minj(m, i, n, j, H, W, C, scaling_parameter_c=128):
     assert m<H*W
     assert n<H*W
     assert i<C
@@ -86,7 +86,7 @@ def get_cost_from_minj(m, i, n, j, H, W, C, scaling_parameter_c=4):
     return res
 
 
-def calculate_causal_distance_between_images(image1, image2, scaling_parameter_c = 4):
+def calculate_causal_distance_between_images(image1, image2, scaling_parameter_c=128):
     assert image1.shape == image2.shape
     H, W, C = image1.shape
     Matrix1 = image1.reshape(-1, C)

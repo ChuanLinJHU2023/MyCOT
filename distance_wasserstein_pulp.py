@@ -51,7 +51,7 @@ def calculate_wasserstein_distance(vector1, vector2, costs):
     return wasserstein_distance, transport_plan
 
 
-def get_cost_from_ij(i, j, H, W, C, scaling_parameter_c=4):
+def get_cost_from_ij(i, j, H, W, C, scaling_parameter_c=128):
     def get_hwc_from_i(i, H, W, C):
         assert i < H * W * C
         c = i % C
@@ -65,7 +65,7 @@ def get_cost_from_ij(i, j, H, W, C, scaling_parameter_c=4):
     return res
 
 
-def calculate_wasserstein_distance_between_images(image1, image2, scaling_parameter_c = 4):
+def calculate_wasserstein_distance_between_images(image1, image2, scaling_parameter_c=128):
     assert image1.shape == image2.shape
     H, W, C = image1.shape
     vector1 = image1.flatten()

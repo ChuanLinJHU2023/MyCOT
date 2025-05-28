@@ -1,4 +1,4 @@
-/opt/anaconda3/envs/MyProject1/bin/python /Users/chuanlin/JHU-LAB/MyCOT/cat_causal_gurobi_May28.py
+/opt/anaconda3/envs/MyProject1/bin/python /Users/chuanlin/JHU-LAB/MyCOT/cat_causal_pulp_May28.py
 #######SHAPE########
 (32, 32, 3)
 ###SCALING FACTOR###
