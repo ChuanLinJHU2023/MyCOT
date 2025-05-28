@@ -27,9 +27,7 @@ def calculate_causal_distance(Matrix1, Matrix2, costs):
     assert (M, I, N, J) == costs.shape
     assert np.all(Matrix1 >= 0)
     assert np.all(Matrix2 >= 0)
-    # Initialize LP problem
     prob = pulp.LpProblem("Causal_Distance", pulp.LpMinimize)
-    # Create decision variables for transportation plan T[m, i, n, j]
     T = {}
     for m in range(M):
         for i in range(I):
@@ -51,7 +49,7 @@ def calculate_causal_distance(Matrix1, Matrix2, costs):
     # Given X^, X is independent of Y
     for m in range(M):
         if np.sum(Matrix1[m]) == 0:
-            # in the case, P-(X^ = m) = 0 and P-(Y^ = i | X^ = m) is undefined. Causality is satisfied automatically
+            # in the case, P(X^ = m) = 0 and P(Y^ = i | X^ = m) is undefined. Causality is satisfied automatically
             continue
         for i in range(I):
             for n in range(N):
@@ -62,17 +60,13 @@ def calculate_causal_distance(Matrix1, Matrix2, costs):
                     == \
                     pulp.lpSum([T[(m, i, n, j)] for i in range(I) for j in range(J)]) * conditional_prob_of_i_given_m \
                     , f"causality_{m}_{i}_{n}"
-    # Solve the LP
-    # prob.solve()
     prob.solve(pulp.GUROBI())
-    # Retrieve the transportation plan
     transport_plan = np.zeros((M, I, N, J))
     for m in range(M):
         for i in range(I):
             for n in range(N):
                 for j in range(J):
                     transport_plan[m, i, n, j] = pulp.value(T[(m, i, n, j)])
-    # Get the optimal value of the problem
     causal_distance = pulp.value(prob.objective)
     return causal_distance, transport_plan
 
