@@ -5,6 +5,8 @@ from utils import *
 def calculate_causal_distance(Matrix1, Matrix2, costs):
     """
     Calculate Wasserstein distance between two discrete distributions using linear programming.
+    Note that we transport from Matrix 1 to Matrix 2
+    In other words, Matrix 1 is P(X^, Y^) while Matrix 2 is P(X, Y)
 
     Parameters:
     - Matrix1: probabilities for the first distribution (size M x I)
@@ -39,14 +41,14 @@ def calculate_causal_distance(Matrix1, Matrix2, costs):
     # Constraints: marginals must match the distributions
     for m in range(M):
         for i in range(I):
-            # P~(X^ = m , Y^ = i) == P-(X^ = m, Y^ = i)
+            # P~(X^ = m , Y^ = i) == P(X^ = m, Y^ = i)
             prob += pulp.lpSum([T[(m, i, n, j)] for n in range(N) for j in range(J)]) == Matrix1[m, i], f"marginal_prob_Xhat_Yhat__{m}_{i}"
     for n in range(N):
         for j in range(J):
-            # P~(X = n , Y = j) == P-(X = n, Y = j)
+            # P~(X = n , Y = j) == P(X = n, Y = j)
             prob += pulp.lpSum([T[(m, i, n, j)] for m in range(M) for i in range(I)]) == Matrix2[n, j], f"marginal_prob_X_Y_{n}_{j}"
     # Constraints: causality
-    # Given X^, Y^ is independent of X
+    # Given X^, X is independent of Y
     for m in range(M):
         if np.sum(Matrix1[m]) == 0:
             # in the case, P-(X^ = m) = 0 and P-(Y^ = i | X^ = m) is undefined. Causality is satisfied automatically
@@ -54,14 +56,15 @@ def calculate_causal_distance(Matrix1, Matrix2, costs):
         for i in range(I):
             for n in range(N):
                 conditional_prob_of_i_given_m = Matrix1[m,i] / np.sum(Matrix1[m])
-                # P~(X^ = m , Y^ = i, X = n) == P~(X^ = m, X = n) * P-(Y^ = i | X^ = m)
+                # P~(X^ = m , Y^ = i, X = n) == P~(X^ = m, X = n) * P(Y^ = i | X^ = m)
                 prob += \
                     pulp.lpSum([T[(m, i, n, j)] for j in range(J)]) \
                     == \
                     pulp.lpSum([T[(m, i, n, j)] for i in range(I) for j in range(J)]) * conditional_prob_of_i_given_m \
                     , f"causality_{m}_{i}_{n}"
     # Solve the LP
-    prob.solve()
+    # prob.solve()
+    prob.solve(pulp.GUROBI())
     # Retrieve the transportation plan
     transport_plan = np.zeros((M, I, N, J))
     for m in range(M):
