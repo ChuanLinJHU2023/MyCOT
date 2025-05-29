@@ -22,9 +22,9 @@ print(img_A.shape)
 print_format_string("SCALING FACTOR", 20)
 print(scaling_parameter_c)
 
-print_format_string("DISTANCE AB", 20)
-dist_AB, _ = calculate_causal_distance_between_images(img_A, img_B, scaling_parameter_c)
-print(dist_AB)
+# print_format_string("DISTANCE AB", 20)
+# dist_AB, _ = calculate_causal_distance_between_images(img_A, img_B, scaling_parameter_c)
+# print(dist_AB)
 
 print_format_string("DISTANCE AC", 20)
 dist_AC, _ = calculate_causal_distance_between_images(img_A, img_C, scaling_parameter_c)
